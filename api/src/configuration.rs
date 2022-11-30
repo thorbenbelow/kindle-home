@@ -24,6 +24,7 @@ impl AppSettings {
     }
 }
 
+#[derive(PartialEq, Eq, Debug)]
 pub enum Environment {
     Dev,
     Prod,
@@ -63,12 +64,20 @@ impl Settings {
         let base_path = std::env::current_dir().expect("Failed to determine the current directory");
         let configuration_directory = base_path.join("config");
 
+        if environment == Environment::Dev {
+            dotenv::dotenv().ok();
+        }
+
         let settings = config::Config::builder()
             .add_source(
                 config::File::from(configuration_directory.join(environment.as_str()))
                     .required(true),
             )
-            .add_source(config::Environment::with_prefix("app").separator("__"))
+            .add_source(
+                config::Environment::with_prefix("APP")
+                    .prefix_separator("__")
+                    .separator("_"),
+            )
             .build()?;
 
         settings.try_deserialize::<Settings>()

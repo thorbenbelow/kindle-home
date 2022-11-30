@@ -19,3 +19,4 @@ tokio = {version = "1", features = ["macros", "rt-multi-thread"]}
 serde = { version = "1", features = ["derive"] }
 config = { version = "0.13", default-features = false, features = ["yaml"] }
 serde-aux = "4.1.2"
+dotenv = "0.15.0"

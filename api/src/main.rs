@@ -14,5 +14,5 @@ async fn main() -> std::io::Result<()> {
 
     // start server
     let listener = TcpListener::bind(configuration.app.address())?;
-    api::server::run(listener)?.await
+    api::server::run(configuration, listener)?.await
 }

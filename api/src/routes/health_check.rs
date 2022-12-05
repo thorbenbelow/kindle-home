@@ -1,5 +1,6 @@
 use actix_web::{web, HttpResponse, Responder, Scope};
 
+#[tracing::instrument(name = "Scope::Init::health_check")]
 pub fn health_check_scope() -> Scope {
     web::scope("/health_check").service(health_check)
 }

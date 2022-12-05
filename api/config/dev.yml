@@ -1,3 +1,6 @@
 app:
   host: localhost
   port: 8000
+  path: "/api/v1"
+hue:
+  base_url: localhost:8000
